@@ -70,8 +70,11 @@ export class GildedRose {
     for (const item of this.items) {
       const itemHasSomeQuality = this.hasQuality(item)
       const isBackstageItem = this.isBackstageItem(item)
+      const isConjuredItem = item.name.includes('Conjured')
       if (item.name === 'Aged Brie' || isBackstageItem) {
         this.updateQualityForAgedBrieOrBackstage(item);
+      } else if (isConjuredItem){
+        item.quality -= 2
       } else if (itemHasSomeQuality && !this.isLegendaryItem(item)) {
         item.quality -= 1
       }
