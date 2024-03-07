@@ -30,12 +30,17 @@ export class GildedRose {
     return item.name === 'Sulfuras, Hand of Ragnaros';
   }
 
+  private isBackstageItem(item: Item) {
+    return item.name === 'Backstage passes to a TAFKAL80ETC concert';
+  }
+
 
   private updateQualityForAgedBrieOrBackstage(element: Item) {
     const isElementQualityLowerThanMaxQuality = this.isElementQualityLowerThanMaxQuality(element)
     if (isElementQualityLowerThanMaxQuality) {
       element.quality += 1
-      if (element.name == 'Backstage passes to a TAFKAL80ETC concert') {
+      const isBackstageItem = this.isBackstageItem(element)
+      if (isBackstageItem) {
         if (element.sellIn < 11) {
           element.quality += 1
         }
@@ -47,11 +52,12 @@ export class GildedRose {
   }
 
   private updateQualityForSellInPassed(item: Item, itemHasSomeQuality: boolean) {
+    const isBackstageItem = this.isBackstageItem(item)
     if (item.name === 'Aged Brie') {
       if (item.quality < this.maxQuality) {
         item.quality += 1
       }
-    } else if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
+    } else if (!isBackstageItem) {
       if (itemHasSomeQuality && !this.isLegendaryItem(item)) {
         item.quality -= 1
       }
@@ -63,7 +69,8 @@ export class GildedRose {
   updateQuality() {
     for (const item of this.items) {
       const itemHasSomeQuality = this.hasQuality(item)
-      if (item.name === 'Aged Brie' || item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+      const isBackstageItem = this.isBackstageItem(item)
+      if (item.name === 'Aged Brie' || isBackstageItem) {
         this.updateQualityForAgedBrieOrBackstage(item);
       } else if (itemHasSomeQuality && !this.isLegendaryItem(item)) {
         item.quality -= 1
