@@ -14,4 +14,11 @@ describe('Gilded Rose', () => {
     expect(items[0].sellIn).toBe(1);
   });
 
+  it('should degrade quality by 2 because sellIn has passed', () => {
+    const gildedRose = new GildedRose([new Item('averageQualityCheese', 0, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(8);
+    expect(items[0].sellIn).toBe(-1);
+  });
+
 });
