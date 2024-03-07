@@ -42,6 +42,20 @@ export class GildedRose {
     }
   }
 
+  private updateQualityForSellInPassed(item: Item, itemHasSomeQuality: boolean) {
+    if (item.name != 'Aged Brie') {
+      if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
+        if (itemHasSomeQuality && item.name != 'Sulfuras, Hand of Ragnaros') {
+          item.quality -= 1
+        }
+      } else {
+        item.quality = 0
+      }
+    } else if (item.quality < this.maxQuality) {
+      item.quality = item.quality + 1
+    }
+  }
+
   updateQuality() {
     for (const item of this.items) {
       const itemHasSomeQuality = this.hasQuality(item)
