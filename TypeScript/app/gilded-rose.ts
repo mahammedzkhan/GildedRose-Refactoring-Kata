@@ -22,6 +22,10 @@ export class GildedRose {
     return element.quality < this.maxQuality
   }
 
+  private hasQuality(item: Item) {
+    return item.quality > 0;
+  }
+
 
   private updateQualityForAgedBrieOrBackstage(element: Item) {
     const isElementQualityLowerThanMaxQuality = this.isElementQualityLowerThanMaxQuality(element)
