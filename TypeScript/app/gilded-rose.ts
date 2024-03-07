@@ -25,19 +25,17 @@ export class GildedRose {
             element.quality = element.quality - 1
           }
         }
-      } else {
-        if (element.quality < 50) {
-          element.quality = element.quality + 1
-          if (element.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (element.sellIn < 11) {
-              if (element.quality < 50) {
-                element.quality = element.quality + 1
-              }
+      } else if (element.quality < 50) {
+        element.quality = element.quality + 1
+        if (element.name == 'Backstage passes to a TAFKAL80ETC concert') {
+          if (element.sellIn < 11) {
+            if (element.quality < 50) {
+              element.quality = element.quality + 1
             }
-            if (element.sellIn < 6) {
-              if (element.quality < 50) {
-                element.quality = element.quality + 1
-              }
+          }
+          if (element.sellIn < 6) {
+            if (element.quality < 50) {
+              element.quality = element.quality + 1
             }
           }
         }
@@ -56,10 +54,8 @@ export class GildedRose {
           } else {
             element.quality = element.quality - element.quality
           }
-        } else {
-          if (element.quality < 50) {
-            element.quality = element.quality + 1
-          }
+        } else if (element.quality < 50) {
+          element.quality = element.quality + 1
         }
       }
     }
