@@ -15,9 +15,16 @@ describe('Gilded Rose', () => {
   });
 
   it('should degrade quality by 2 because sellIn has passed', () => {
-    const gildedRose = new GildedRose([new Item('averageQualityCheese', 0, 10)]);
+    const gildedRose = new GildedRose([new Item('Average Quality Cheese', 0, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(8);
+    expect(items[0].sellIn).toBe(-1);
+  });
+
+  it('should never have negative quality', () => {
+    const gildedRose = new GildedRose([new Item('Low Quality Cheese', 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(0);
     expect(items[0].sellIn).toBe(-1);
   });
 
